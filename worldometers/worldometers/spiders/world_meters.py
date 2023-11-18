@@ -16,16 +16,16 @@ class WorldMetersSpider(scrapy.Spider):
             # absolute_url = f"https://www.worldometers.info{link}"
             # absolute_url = response.urljoin(link)
 
-            yield response.follow(url=link, callback = self.parse_country)
+            yield response.follow(url=link, callback = self.parse_country) # At here in self.parse_country we are calling the below function
 
     
     def parse_country(self, response):
         rows = response.xpath("(//table[@class='table table-striped table-bordered table-hover table-condensed table-list'])[1]/tbody/tr")
         for row in rows:
-            year = row.xpath('.//td[1]/text()').get()
-            population = row.xpath('.//td[2]/strong/text()').get()
+            year = row.xpath('.//td[1]/text()').get() # Brings year part from each row which index of td is 1 stands for year
+            population = row.xpath('.//td[2]/strong/text()').get() # td index 2 contains population inside it
 
-            yield {
-                'year': year,
+            yield {  # with the help of yield function we are returning them back
+                'year': year,  
                 'population': population
             }
