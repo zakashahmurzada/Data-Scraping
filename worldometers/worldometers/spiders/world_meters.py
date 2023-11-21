@@ -16,7 +16,7 @@ class WorldMetersSpider(scrapy.Spider):
             # absolute_url = f"https://www.worldometers.info{link}"
             # absolute_url = response.urljoin(link)
 
-            yield response.follow(url=link, callback = self.parse_country, meta={'country_name': name}) # At here in self.parse_country we are calling the below function
+            yield response.follow(url=link, callback = self.parse_country, meta={'country_name': name}) # parse_country method uses this part for its aim
 
     
     def parse_country(self, response):
